@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-playa_autos}
+      POSTGRES_USER: ${DB_USER:-playa}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-playa_secret}
+      TZ: ${TZ:-America/Asuncion}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_HOST_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-playa_autos}
+      DB_USER: ${DB_USER:-playa}
+      DB_PASSWORD: ${DB_PASSWORD:-playa_secret}
+      JWT_SECRET: ${JWT_SECRET:-cambiar-este-secreto-en-produccion}
+      TZ: ${TZ:-America/Asuncion}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${BACKEND_HOST_PORT:-8000}:80"
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_HOST_PORT:-8081}:80"
+
+volumes:
+  pgdata:
