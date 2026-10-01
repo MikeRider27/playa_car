@@ -7,6 +7,23 @@ Sistema de gestión para una playa de venta de autos: stock de vehículos, clien
 - **Base de datos:** PostgreSQL 16
 - **Todo dockerizado** con Docker Compose
 
+## Historia del proyecto
+
+El proyecto nació en 2020 como **PHP-CRUD-VUE-JS**, un CRUD de práctica para aprender Vue.js: una sola tabla de móviles (`marca`, `modelo`, `stock`), un `index.php` con Vue 2 cargado desde CDN, jQuery, Bootstrap 4 y SweetAlert2, y un `crud.php` que recibía un número de `opcion` para insertar, editar, borrar o listar. Se corría en XAMPP y la base se restauraba a mano en pgAdmin.
+
+A partir de esa base evolucionó a un **sistema de gestión completo** para una playa de autos:
+
+| | CRUD de práctica (2020) | Sistema de gestión (actual) |
+|---|---|---|
+| Dominio | Una tabla de móviles | Vehículos, marcas, clientes, ventas y usuarios |
+| Backend | Un script PHP con `switch` por opción | API REST con router, controladores y validación |
+| Seguridad | Consultas SQL concatenadas, sin login | Consultas preparadas, login con JWT y roles admin/vendedor |
+| Frontend | Vue 2 por CDN + jQuery + SweetAlert2 | Vue 3 + Vite + Vue Router con AdminLTE 4 |
+| Base de datos | Backup `.backup` restaurado a mano | Esquema y datos iniciales automáticos en PostgreSQL 16 |
+| Instalación | XAMPP + pgAdmin | `docker compose up` |
+
+El código del CRUD original sigue disponible en el historial de git (commit `e69a827`).
+
 ## Inicio rápido
 
 ```bash
@@ -108,4 +125,6 @@ npm run dev   # http://localhost:5173 (hace proxy de /api a localhost:8000)
 
 ## Licencia
 
-Copyright © 2020-present [Miguel Villalba](https://github.com/RiderMike27) 🧔
+Distribuido bajo la licencia [MIT](LICENSE).
+
+Copyright © 2020-present [Miguel Villalba](https://github.com/MikeRider27) 🧔
