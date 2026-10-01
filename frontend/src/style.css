@@ -1,0 +1,80 @@
+.vehiculo-img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  width: 100%;
+}
+.vehiculo-img-placeholder {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, #0d6efd, #20c997);
+}
+.vehiculo-thumb {
+  width: 64px;
+  flex: none;
+}
+.vehiculo-thumb .vehiculo-img-placeholder {
+  font-size: 1.4rem;
+}
+.catalogo-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.catalogo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12) !important;
+}
+.hero {
+  background: linear-gradient(135deg, #1e293b 0%, #0d6efd 100%);
+}
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 220px;
+}
+.chart-bars .bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+.chart-bars .bar {
+  width: 100%;
+  max-width: 56px;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: var(--bs-primary);
+  transition: height 0.4s ease;
+}
+.table td,
+.table th {
+  vertical-align: middle;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
